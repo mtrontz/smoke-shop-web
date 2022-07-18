@@ -15,7 +15,8 @@ import {
   useCatch,
   useOutlet,
 } from '@remix-run/react';
-
+import { Header } from '~/components/Header';
+import { Animate } from '~/components/Animate';
 import stylesUrl from '~/styles/tailwind.css';
 
 /**
@@ -89,7 +90,9 @@ function Layout({ children }: React.PropsWithChildren<{}>) {
           <RemixLogo />
         </Link>
       </header>
-      <main className="flex-grow">{children}</main>
+      <main className="flex-grow overflow-hidden prose md:prose-lg break-words">
+        <Animate>{children}</Animate>
+      </main>
       <footer className="sm:px-10 p-5">
         Wanna know more about Remix? Check out{' '}
         <a
