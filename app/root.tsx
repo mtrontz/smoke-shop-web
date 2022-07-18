@@ -13,6 +13,7 @@ import {
   Scripts,
   ScrollRestoration,
   useCatch,
+  useOutlet,
 } from '@remix-run/react';
 
 import stylesUrl from '~/styles/tailwind.css';
@@ -26,7 +27,14 @@ import stylesUrl from '~/styles/tailwind.css';
  * https://remix.run/api/app#links
  */
 export let links: LinksFunction = () => {
-  return [{ rel: 'stylesheet', href: stylesUrl }];
+  return [
+    { rel: 'stylesheet', href: stylesUrl },
+    {
+      rel: 'icon',
+      type: 'image/x-icon',
+      href: '/favicon.ico',
+    },
+  ];
 };
 
 export let meta: MetaFunction = () => {
@@ -40,11 +48,10 @@ export let loader: LoaderFunction = async () => {
 };
 
 export default function App() {
+  const outlet = useOutlet();
   return (
     <Document>
-      <Layout>
-        <Outlet />
-      </Layout>
+      <Layout>{outlet}</Layout>
     </Document>
   );
 }
@@ -64,7 +71,7 @@ function Document({
         <Meta />
         <Links />
       </head>
-      <body>
+      <body className="px-4 container mx-auto lg:max-w-3xl min-h-screen">
         {children}
         <ScrollRestoration />
         <Scripts />
